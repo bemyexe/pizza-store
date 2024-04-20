@@ -1,4 +1,12 @@
 .background-app {
   background: var(--orange-50);
   min-height: 100vh;
+  padding: 10px;
+  .main-app {
+    background-color: var(--gray-25);
+    width: 1000px;
+    margin: 10px auto 0 auto;
+    border-radius: 6px;
+    padding: 10px;
+  }
 }
