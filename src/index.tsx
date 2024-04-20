@@ -3,6 +3,9 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MainPage from "./app/pages/main-page";
 
+import "./styles/global-styles.scss";
+import "./styles/colors.scss";
+
 const router = createBrowserRouter([
   {
     path: "/",
