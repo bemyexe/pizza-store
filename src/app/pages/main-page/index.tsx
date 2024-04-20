@@ -1,5 +1,7 @@
+import "./style.scss";
+
 const MainPage = () => {
-  return <>main-page</>;
+  return <div className="background-app"></div>;
 };
 
 export default MainPage;
