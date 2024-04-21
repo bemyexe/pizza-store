@@ -1,4 +1,5 @@
 import Header from "../../components/header";
+import ToggleBar from "../../components/shared/toggle-bar";
 import "./style.scss";
 
 const MainPage = () => {
@@ -7,6 +8,7 @@ const MainPage = () => {
       <div className="main-app">
         <Header />
         <div>app</div>
+        <ToggleBar />
       </div>
     </div>
   );
