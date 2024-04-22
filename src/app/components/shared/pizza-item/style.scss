@@ -1,0 +1,41 @@
+.pizza-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  .pizza-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .pizza-img {
+      max-height: 200px;
+      max-width: 200px;
+      cursor: pointer;
+    }
+  }
+  .pizza-options {
+    padding: 3px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--gray-50);
+    .pizza-options_content {
+      display: flex;
+      justify-content: space-around;
+    }
+    .pizza-button {
+      border-radius: 5px;
+      width: 100%;
+      &:active,
+      &.active {
+        border-radius: 5px;
+        color: var(--gray-900);
+        background-color: var(--gray-25);
+      }
+    }
+  }
+  .pizza-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
