@@ -36,7 +36,7 @@ const PizzaItem: FC<PizzaItemProps> = ({
               key={uuidv4()}
               onClick={() => {}}
               title={title}
-              className="pizza-button"
+              styleType="options"
             >
               {TYPES[item]}
             </Button>
@@ -48,7 +48,7 @@ const PizzaItem: FC<PizzaItemProps> = ({
               key={uuidv4()}
               onClick={() => {}}
               title={title}
-              className="pizza-button"
+              styleType="options"
             >
               {item}
             </Button>
@@ -60,7 +60,7 @@ const PizzaItem: FC<PizzaItemProps> = ({
           <TextMSemibold>{`от ${price} Р`}</TextMSemibold>
         </div>
         <div>
-          <Button onClick={() => {}} title={title}>
+          <Button onClick={() => {}} title={title} styleType="add">
             {ADD}
           </Button>
         </div>
