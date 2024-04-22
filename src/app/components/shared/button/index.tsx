@@ -2,12 +2,15 @@ import classnames from "classnames";
 
 import "./style.scss";
 
+type styleType = "toggle" | "cart" | "options" | "add";
+
 interface ButtonProps {
   onClick: () => void;
   children: React.ReactNode;
   className?: string;
   title: string;
   type?: "button" | "submit" | "reset";
+  styleType?: styleType;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -16,10 +19,11 @@ const Button: React.FC<ButtonProps> = ({
   className,
   title,
   type = "button",
+  styleType = "toggle",
 }) => {
   return (
     <button
-      className={classnames("button", className)}
+      className={classnames("button", styleType, className)}
       onClick={onClick}
       title={title}
       type={type}
