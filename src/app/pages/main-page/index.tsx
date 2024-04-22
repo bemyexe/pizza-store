@@ -7,8 +7,8 @@ const MainPage = () => {
     <div className="background-app">
       <div className="main-app">
         <Header />
-        <div>app</div>
         <ToggleBar />
+        <div>app</div>
       </div>
     </div>
   );
