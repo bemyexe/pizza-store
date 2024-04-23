@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import Button from "../button";
 import { TextMSemibold } from "../typography";
 import { v4 as uuidv4 } from "uuid";
@@ -23,6 +23,9 @@ const PizzaItem: FC<PizzaItemProps> = ({
   price,
   sizes,
 }) => {
+  const [type, setType] = useState(0);
+  const [size, setSize] = useState(0);
+
   return (
     <div className="pizza-item">
       <div className="pizza-header">
@@ -34,21 +37,27 @@ const PizzaItem: FC<PizzaItemProps> = ({
           {types.map((item) => (
             <Button
               key={uuidv4()}
-              onClick={() => {}}
+              onClick={() => {
+                setType(item);
+              }}
               title={title}
               styleType="options"
+              className={type === item ? "active" : ""}
             >
               {TYPES[item]}
             </Button>
           ))}
         </div>
         <div className="pizza-options_content">
-          {sizes.map((item) => (
+          {sizes.map((item, i) => (
             <Button
               key={uuidv4()}
-              onClick={() => {}}
+              onClick={() => {
+                setSize(i);
+              }}
               title={title}
               styleType="options"
+              className={size === i ? "active" : ""}
             >
               {item}
             </Button>

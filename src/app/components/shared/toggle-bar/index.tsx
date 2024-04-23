@@ -12,16 +12,12 @@ interface ToggleBarProps {
 const ToggleBar: FC<ToggleBarProps> = ({ className }) => {
   const [activeToggle, setActiveToggle] = useState(0);
 
-  const onClickCategory = (i: number) => {
-    setActiveToggle(i);
-  };
-
   return (
     <div className={classNames("toggle-bar", className)}>
       {CATEGORIES.map((item, i) => (
         <Button
           key={i}
-          onClick={() => onClickCategory(i)}
+          onClick={() => setActiveToggle(i)}
           title={item}
           className={activeToggle === i ? "active" : ""}
         >
