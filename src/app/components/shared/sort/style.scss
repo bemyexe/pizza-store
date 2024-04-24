@@ -1,0 +1,17 @@
+.sort-main {
+  align-items: center;
+  .sort-title {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 2px;
+  }
+  .sort-popup {
+    position: absolute;
+    right: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+  }
+}
