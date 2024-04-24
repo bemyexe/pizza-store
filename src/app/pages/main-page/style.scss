@@ -9,9 +9,13 @@
     margin: 10px auto 0 auto;
     border-radius: 6px;
     padding: 10px;
-  }
-  .main-content {
-    display: flex;
-    flex-direction: column;
+    .toggle-sort {
+      display: flex;
+      justify-content: space-between;
+    }
+    .main-content {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
