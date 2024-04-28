@@ -1,0 +1,13 @@
+.background-app {
+  background: var(--orange-50);
+  min-height: 100vh;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  .main-app {
+    background-color: var(--gray-25);
+    margin: 10px auto 0 auto;
+    border-radius: 6px;
+    padding: 10px;
+  }
+}
