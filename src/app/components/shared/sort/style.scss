@@ -1,5 +1,6 @@
 .sort-main {
   align-items: center;
+  position: relative;
   .sort-title {
     display: flex;
     gap: 5px;
@@ -8,7 +9,7 @@
   }
   .sort-popup {
     position: absolute;
-    right: 15px;
+    right: 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;

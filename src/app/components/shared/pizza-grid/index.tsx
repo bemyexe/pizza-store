@@ -33,7 +33,7 @@ const PizzaGrid: FC<PizzaGridProps> = ({ categoryId }) => {
   return (
     <div className="pizza-grid">
       {isLoading
-        ? [...new Array(6)].map(() => <Skeleton key={uuidv4()} />)
+        ? [...new Array(3)].map(() => <Skeleton key={uuidv4()} />)
         : pizza.map((item) =>
             item.category === categoryId ? (
               <PizzaItem key={uuidv4()} {...item} />
