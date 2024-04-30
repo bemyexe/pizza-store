@@ -14,18 +14,18 @@ const PizzaGrid: FC = () => {
   const [pizza, setPizza] = useState<PizzaItems>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  async function fetchPizza() {
-    try {
-      setIsLoading(true);
-      const res = await pizzaservice.getPizzaItems();
-      setPizza(res);
-    } catch {
-      console.log("error");
-    } finally {
-      setIsLoading(false);
-    }
-  }
   useEffect(() => {
+    async function fetchPizza() {
+      try {
+        setIsLoading(true);
+        const res = await pizzaservice.getPizzaItems();
+        setPizza(res);
+      } catch {
+        console.log("error");
+      } finally {
+        setIsLoading(false);
+      }
+    }
     fetchPizza();
   }, []);
 
