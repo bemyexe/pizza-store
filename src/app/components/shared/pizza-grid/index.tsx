@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { pizzaservice } from "../../../services/pizza.service/pizza.service";
 import { PizzaItems } from "../../../services/pizza.service/response/pizza.response";
 import { v4 as uuidv4 } from "uuid";
@@ -6,12 +6,11 @@ import { v4 as uuidv4 } from "uuid";
 import "./style.scss";
 import PizzaItem from "../pizza-item";
 import Skeleton from "../skeleton";
+import { SomeContext } from "../../../pages/root-page";
 
-interface PizzaGridProps {
-  categoryId: number;
-}
+const PizzaGrid: FC = () => {
+  const { state } = useContext(SomeContext);
 
-const PizzaGrid: FC<PizzaGridProps> = ({ categoryId }) => {
   const [pizza, setPizza] = useState<PizzaItems>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -28,21 +27,19 @@ const PizzaGrid: FC<PizzaGridProps> = ({ categoryId }) => {
   }
   useEffect(() => {
     fetchPizza();
-  }, [categoryId]);
+  }, []);
 
-  return (
-    <div className="pizza-grid">
-      {isLoading
-        ? [...new Array(3)].map(() => <Skeleton key={uuidv4()} />)
-        : pizza.map((item) =>
-            item.category === categoryId ? (
-              <PizzaItem key={uuidv4()} {...item} />
-            ) : (
-              ""
-            )
-          )}
-    </div>
-  );
+  const skeleton = [...new Array(3)].map(() => <Skeleton key={uuidv4()} />);
+  const pizzas = pizza
+    .filter((item) => {
+      if (item.title.toLowerCase().includes(state.toLowerCase())) {
+        return true;
+      }
+      return false;
+    })
+    .map((item) => <PizzaItem key={uuidv4()} {...item} />);
+
+  return <div className="pizza-grid">{isLoading ? skeleton : pizzas}</div>;
 };
 
 export default PizzaGrid;
