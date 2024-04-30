@@ -20,7 +20,7 @@ const MainPage = () => {
       </div>
       <div className="main-content">
         <TextXLRegular>MENU</TextXLRegular>
-        <PizzaGrid categoryId={categoryId} />
+        <PizzaGrid />
       </div>
     </>
   );
