@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { CATEGORIES } from "../../../../data/pizza-categories";
 import Button from "../button";
 import classNames from "classnames";
@@ -7,15 +7,10 @@ import "./style.scss";
 
 interface ToggleBarProps {
   className?: string;
-  categoryId: number;
-  setCategoryId: (i: number) => void;
 }
 
-const ToggleBar: FC<ToggleBarProps> = ({
-  className,
-  categoryId,
-  setCategoryId,
-}) => {
+const ToggleBar: FC<ToggleBarProps> = ({ className }) => {
+  const [categoryId, setCategoryId] = useState(0);
   return (
     <div className={classNames("toggle-bar", className)}>
       {CATEGORIES.map((item, i) => (
