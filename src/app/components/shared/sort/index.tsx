@@ -2,16 +2,23 @@ import { useState } from "react";
 import Button from "../button";
 import { v4 as uuidv4 } from "uuid";
 import "./style.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { setSort } from "../../../store/slices/filterSlice";
 
-const LIST = ["Popular", "Price", "Letters"];
+const LIST = [
+  { sortType: "popular" },
+  { sortType: "price" },
+  { sortType: "letters" },
+];
 
 const Sort = () => {
-  const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(0);
-  const SORT_LIST = LIST[selected];
+  const sort = useSelector((state) => state.filter.sort.sortType);
+  const dispatch = useDispatch();
 
-  const handleClickSort = (i: number) => {
-    setSelected(i);
+  const [open, setOpen] = useState(false);
+
+  const handleClickSort = (obj) => {
+    dispatch(setSort(obj));
     setOpen(!open);
   };
 
@@ -20,20 +27,20 @@ const Sort = () => {
       <div className="sort-title">
         <div>Sort by:</div>
         <Button onClick={() => setOpen(!open)} title="popular" styleType="add">
-          {SORT_LIST}
+          {sort}
         </Button>
       </div>
       {open && (
         <div className="sort-popup">
-          {LIST.map((item, i) => (
+          {LIST.map((item) => (
             <Button
               key={uuidv4()}
-              onClick={() => handleClickSort(i)}
-              title={item}
+              onClick={() => handleClickSort(item.sortType)}
+              title={item.sortType}
               styleType="add"
-              className={selected === i ? "active" : ""}
+              className={sort === item.sortType ? "active" : ""}
             >
-              {item}
+              {item.sortType}
             </Button>
           ))}
         </div>
