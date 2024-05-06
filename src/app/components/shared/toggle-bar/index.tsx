@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { CATEGORIES } from "../../../../data/pizza-categories";
 import Button from "../button";
 import classNames from "classnames";
 
@@ -11,6 +10,8 @@ import { setCategoryId } from "../../../store/slices/filterSlice";
 interface ToggleBarProps {
   className?: string;
 }
+
+const CATEGORIES = ["All", "Meat", "Vegan", "Grill", "Spicy", "Calzone"];
 
 const ToggleBar: FC<ToggleBarProps> = ({ className }) => {
   const categoryId = useSelector((state) => state.filter.categoryId);
