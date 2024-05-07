@@ -1,6 +1,6 @@
-import PizzaGrid from "../../components/shared/pizza-grid";
+import PizzaGrid from "../../components/pizza-grid";
 import Sort from "../../components/shared/sort";
-import ToggleBar from "../../components/shared/toggle-bar";
+import ToggleBar from "../../components/toggle-bar";
 import { TextXLRegular } from "../../components/shared/typography";
 
 import "./style.scss";

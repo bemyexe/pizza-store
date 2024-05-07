@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Button from "../button";
+import Button from "../shared/button";
 import classNames from "classnames";
 
 import "./style.scss";
-import { setCategoryId } from "../../../store/slices/filterSlice";
+import { setCategoryId } from "../../store/slices/filterSlice";
 
 interface ToggleBarProps {
   className?: string;
