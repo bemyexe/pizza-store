@@ -1,0 +1,32 @@
+.cart-item {
+  max-width: 450px;
+  margin: 5px auto;
+  padding: 10px;
+  border: 1px solid var(--gray-50);
+  .cart-item-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .cart-item-content {
+      display: flex;
+      gap: 15px;
+      .cart-item-img {
+        width: 50px;
+        height: 50px;
+      }
+      .cart-item-main {
+        width: 190px;
+      }
+    }
+  }
+}
+
+.cart-item-counter {
+  cursor: pointer;
+}
+
+.cart-item-clear {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
