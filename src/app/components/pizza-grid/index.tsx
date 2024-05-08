@@ -1,17 +1,19 @@
 import { FC, useContext, useEffect, useState } from "react";
 import { pizzaservice } from "../../services/pizza.service/pizza.service";
-import { PizzaItems } from "../../services/pizza.service/response/pizza.response";
 import { v4 as uuidv4 } from "uuid";
 
 import "./style.scss";
 import PizzaItem from "../pizza-item";
 import Skeleton from "../shared/skeleton";
 import { SomeContext } from "../../pages/root-page";
+import { useDispatch, useSelector } from "react-redux";
+import { setItems } from "../../store/slices/pizzaSlice";
 
 const PizzaGrid: FC = () => {
   const { state } = useContext(SomeContext);
 
-  const [pizza, setPizza] = useState<PizzaItems>([]);
+  const pizza = useSelector((state) => state.pizza.items);
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -19,7 +21,7 @@ const PizzaGrid: FC = () => {
       try {
         setIsLoading(true);
         const res = await pizzaservice.getPizzaItems();
-        setPizza(res);
+        dispatch(setItems(res));
       } catch {
         console.log("error");
       } finally {
@@ -27,7 +29,7 @@ const PizzaGrid: FC = () => {
       }
     }
     fetchPizza();
-  }, []);
+  }, [dispatch]);
 
   const skeleton = [...new Array(3)].map(() => <Skeleton key={uuidv4()} />);
   const pizzas = pizza
