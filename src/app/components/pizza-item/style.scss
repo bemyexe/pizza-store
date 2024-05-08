@@ -10,10 +10,9 @@
       max-height: 200px;
       max-width: 200px;
       cursor: pointer;
-      transition: top 150ms ease-out 0s;
+      transition: transform 0.3s ease;
       &:hover {
         transform: translateY(5px);
-        transition: all 0.5s;
       }
     }
   }
