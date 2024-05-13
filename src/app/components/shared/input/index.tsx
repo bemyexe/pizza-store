@@ -1,4 +1,4 @@
-import { FC, useContext, useRef } from "react";
+import { ChangeEvent, FC, useContext, useRef } from "react";
 import "./style.scss";
 import { SomeContext } from "../../../pages/root-page";
 
@@ -16,7 +16,9 @@ const Input: FC = () => {
       <input
         ref={inputRef}
         value={state}
-        onChange={(e) => setState(e.target.value)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setState(e.target.value)
+        }
         placeholder="what pizza?"
         className="input"
       />
