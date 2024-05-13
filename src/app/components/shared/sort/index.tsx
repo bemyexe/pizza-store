@@ -3,28 +3,33 @@ import Button from "../button";
 import { v4 as uuidv4 } from "uuid";
 import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { setSort } from "../../../store/slices/filterSlice";
+import { setSort } from "../../../store/slices/filter/filterSlice";
+import { selectSortType } from "../../../store/slices/filter/selectors";
 
-const LIST = [
+type ListType = {
+  sortType: string;
+};
+
+const LIST: ListType[] = [
   { sortType: "popular" },
   { sortType: "price" },
   { sortType: "letters" },
 ];
 
 const Sort = () => {
-  const sortRef = useRef(null);
-  const sort = useSelector((state) => state.filter.sort.sortType);
+  const sortRef = useRef<HTMLDivElement>(null);
+  const sort = useSelector(selectSortType);
   const dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);
 
-  const handleClickSort = (obj) => {
-    dispatch(setSort(obj));
+  const handleClickSort = (item: string) => {
+    dispatch(setSort(item));
     setOpen(!open);
   };
 
   useEffect(() => {
-    const handleClickOutSide = (e) => {
+    const handleClickOutSide = (e: { composedPath: () => EventTarget[] }) => {
       if (sortRef.current && !e.composedPath().includes(sortRef.current))
         setOpen(false);
     };
