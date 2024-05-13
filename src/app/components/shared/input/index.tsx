@@ -4,7 +4,7 @@ import { SomeContext } from "../../../pages/root-page";
 
 const Input: FC = () => {
   const { state, setState } = useContext(SomeContext);
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClearInput = () => {
     setState("");
