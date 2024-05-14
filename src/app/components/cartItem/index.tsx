@@ -3,7 +3,11 @@ import { FC } from "react";
 import "./style.scss";
 import { TextMLight } from "../shared/typography";
 import { useDispatch } from "react-redux";
-import { addItem, minusItem, removeItem } from "../../store/slices/cartSlice";
+import {
+  addItem,
+  minusItem,
+  removeItem,
+} from "../../store/slices/cart/cartSlice";
 
 interface CartItemProps {
   id: string;
@@ -14,6 +18,8 @@ interface CartItemProps {
   quantity: number;
   imageUrl: string;
 }
+
+const SIZES = ["26sm.", "30sm.", "40sm"];
 
 const CartItem: FC<CartItemProps> = ({
   id,
@@ -38,13 +44,11 @@ const CartItem: FC<CartItemProps> = ({
         <div className="cart-item-content">
           <img src={imageUrl} className="cart-item-img" />
           <div className="cart-item-main">
-            <div className="cart-item-title">
-              {id}
-              {title}
-            </div>
+            <div className="cart-item-title">{title}</div>
             <div className="cart-item-options">
               <div>
-                <TextMLight>{type}</TextMLight>, <TextMLight>{size}</TextMLight>
+                <TextMLight>{type}</TextMLight>,{" "}
+                <TextMLight>{SIZES[size]}</TextMLight>
               </div>
             </div>
           </div>
