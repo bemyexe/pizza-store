@@ -1,6 +1,15 @@
+@import "src/styles/mixins.scss";
+
 .pizza-grid {
   display: grid;
   gap: 30px;
   grid-template-columns: repeat(3, minmax(auto, 400px));
   // grid-template-rows: repeat(7, minmax(80px, auto));
+}
+
+@include mobile {
+  .pizza-grid {
+    display: flex;
+    flex-direction: column;
+  }
 }
