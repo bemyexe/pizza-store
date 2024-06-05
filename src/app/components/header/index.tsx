@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Button from "../shared/button";
 import Input from "../shared/input";
 
 import "./styles.scss";
 import { useSelector } from "react-redux";
+import { selectCart } from "../../store/slices/cart/selectors";
 
 const Header = () => {
-  const { totalPrice, items } = useSelector((state) => state.cart);
+  const { totalPrice, items } = useSelector(selectCart);
   const quantity = items.reduce((sum, items) => items.quantity + sum, 0);
+  const location = useLocation();
+
   return (
     <div className="header">
       <Link to={"/pizza"}>
@@ -15,9 +18,11 @@ const Header = () => {
       </Link>
       <Input />
       <Link to={"cart"}>
-        <Button onClick={() => {}} title={""} styleType="cart">
-          {totalPrice} Р. | {quantity}
-        </Button>
+        {location.pathname !== "/cart" && (
+          <Button onClick={() => {}} title={""} styleType="cart">
+            {totalPrice} Р. | {quantity}
+          </Button>
+        )}
       </Link>
     </div>
   );
