@@ -1,4 +1,4 @@
-interface PizzaItem {
+export interface IPizzaItem {
   id: number;
   imageUrl: string;
   title: string;
@@ -9,4 +9,4 @@ interface PizzaItem {
   rating: number;
 }
 
-export type PizzaItems = PizzaItem[];
+export type PizzaItems = IPizzaItem[];
