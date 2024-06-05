@@ -5,7 +5,11 @@ import { v4 as uuidv4 } from "uuid";
 
 import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "../../store/slices/cart/cartSlice";
+import {
+  addItem,
+  minusItem,
+  removeItem,
+} from "../../store/slices/cart/cartSlice";
 import { selectCartItemById } from "../../store/slices/cart/selectors";
 
 interface PizzaItemProps {
@@ -33,7 +37,8 @@ const PizzaItem: FC<PizzaItemProps> = ({
   const ItemInCart = useSelector(selectCartItemById(id));
   const addedQuantity = ItemInCart ? ItemInCart.quantity : 0;
   const dispatch = useDispatch();
-  const handleAddCart = () => {
+  const handleAddCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
     const item = {
       id,
       title,
@@ -45,6 +50,13 @@ const PizzaItem: FC<PizzaItemProps> = ({
       quantity: 0,
     };
     dispatch(addItem(item));
+  };
+  const onclickMinus = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (addedQuantity === 1) {
+      dispatch(removeItem(id));
+    }
+    dispatch(minusItem(id));
   };
 
   return (
@@ -90,11 +102,35 @@ const PizzaItem: FC<PizzaItemProps> = ({
           <TextMSemibold>{`от ${price} Р`}</TextMSemibold>
         </div>
         <div>
-          <Button onClick={() => handleAddCart()} title={title} styleType="add">
-            + {ADD}
+          <Button
+            onClick={(e) => handleAddCart(e)}
+            title={title}
+            styleType="add"
+          >
+            <Button
+              onClick={(e) => {
+                handleAddCart(e);
+              }}
+              title={title}
+            >
+              +
+            </Button>
+            {ADD}
             <TextLSemibold>
               {addedQuantity > 0 ? addedQuantity : ""}
             </TextLSemibold>
+            {addedQuantity ? (
+              <Button
+                onClick={(e) => {
+                  onclickMinus(e);
+                }}
+                title={title}
+              >
+                -
+              </Button>
+            ) : (
+              ""
+            )}
           </Button>
         </div>
       </div>

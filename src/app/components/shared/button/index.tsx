@@ -5,7 +5,7 @@ import "./style.scss";
 type styleType = "toggle" | "cart" | "options" | "add";
 
 interface ButtonProps {
-  onClick: () => void;
+  onClick: (e: React.MouseEvent) => void;
   children: React.ReactNode;
   className?: string;
   title: string;
