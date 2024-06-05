@@ -9,7 +9,7 @@ import { addItem } from "../../store/slices/cart/cartSlice";
 import { selectCartItemById } from "../../store/slices/cart/selectors";
 
 interface PizzaItemProps {
-  id: string;
+  id: number;
   title: string;
   imageUrl: string;
   types: number[];

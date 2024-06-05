@@ -5,7 +5,8 @@ import Button from "../shared/button";
 import classNames from "classnames";
 
 import "./style.scss";
-import { setCategoryId } from "../../store/slices/filterSlice";
+import { setCategoryId } from "../../store/slices/filter/filterSlice";
+import { selectFilterCategoryId } from "../../store/slices/filter/selectors";
 
 interface ToggleBarProps {
   className?: string;
@@ -14,7 +15,7 @@ interface ToggleBarProps {
 const CATEGORIES = ["All", "Meat", "Vegan", "Grill", "Spicy", "Calzone"];
 
 const ToggleBar: FC<ToggleBarProps> = ({ className }) => {
-  const categoryId = useSelector((state) => state.filter.categoryId);
+  const categoryId = useSelector(selectFilterCategoryId);
   const dispatch = useDispatch();
   return (
     <div className={classNames("toggle-bar", className)}>

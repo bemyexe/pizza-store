@@ -10,7 +10,7 @@ import {
 } from "../../store/slices/cart/cartSlice";
 
 interface CartItemProps {
-  id: string;
+  id: number;
   title: string;
   type: string;
   size: number;
@@ -32,7 +32,18 @@ const CartItem: FC<CartItemProps> = ({
 }) => {
   const dispatch = useDispatch();
   const onclickPlus = () => {
-    dispatch(addItem({ id }));
+    dispatch(
+      addItem({
+        id,
+        title: "",
+        price: 0,
+        imageUrl: "",
+        type: "",
+        size: 0,
+        count: 0,
+        quantity: 0,
+      })
+    );
   };
   const onclickMinus = () => {
     dispatch(minusItem(id));
