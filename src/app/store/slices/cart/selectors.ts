@@ -1,5 +1,8 @@
-export const selectCart = (state) => state.cart;
-export const selectCartItems = (state) => state.cart.items;
+import { RootStateBase } from "../../store";
+import { CartItem } from "./types";
 
-export const selectCartItemById = (id: string) => (state) =>
-  state.cart.items.find((item) => item.id === id);
+export const selectCart = (state: RootStateBase) => state.cart;
+export const selectCartItems = (state: RootStateBase) => state.cart.items;
+
+export const selectCartItemById = (id: string) => (state: RootStateBase) =>
+  state.cart.items.find((item: CartItem) => item.id === id);

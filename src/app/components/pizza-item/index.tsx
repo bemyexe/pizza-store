@@ -5,10 +5,11 @@ import { v4 as uuidv4 } from "uuid";
 
 import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "../../store/slices/cartSlice";
+import { addItem } from "../../store/slices/cart/cartSlice";
+import { selectCartItemById } from "../../store/slices/cart/selectors";
 
 interface PizzaItemProps {
-  id: number;
+  id: string;
   title: string;
   imageUrl: string;
   types: number[];
@@ -29,9 +30,7 @@ const PizzaItem: FC<PizzaItemProps> = ({
 }) => {
   const [type, setType] = useState(0);
   const [size, setSize] = useState(0);
-  const ItemInCart = useSelector((state) =>
-    state.cart.items.find((item) => item.id === id)
-  );
+  const ItemInCart = useSelector(selectCartItemById(id));
   const addedQuantity = ItemInCart ? ItemInCart.quantity : 0;
   const dispatch = useDispatch();
   const handleAddCart = () => {
@@ -42,6 +41,8 @@ const PizzaItem: FC<PizzaItemProps> = ({
       imageUrl,
       type: TYPES[type],
       size: size,
+      count: 0,
+      quantity: 0,
     };
     dispatch(addItem(item));
   };
@@ -90,8 +91,10 @@ const PizzaItem: FC<PizzaItemProps> = ({
         </div>
         <div>
           <Button onClick={() => handleAddCart()} title={title} styleType="add">
-            + {ADD}{" "}
-            <TextLSemibold>{addedQuantity > 0 && addedQuantity}</TextLSemibold>
+            + {ADD}
+            <TextLSemibold>
+              {addedQuantity > 0 ? addedQuantity : ""}
+            </TextLSemibold>
           </Button>
         </div>
       </div>
