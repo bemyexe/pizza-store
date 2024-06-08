@@ -125,6 +125,7 @@ const PizzaItem: FC<PizzaItemProps> = ({
                   onclickMinus(e);
                 }}
                 title={title}
+                className="minusBtn"
               >
                 -
               </Button>
