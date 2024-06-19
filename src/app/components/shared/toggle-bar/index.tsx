@@ -1,12 +1,13 @@
 import { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
-import Button from "../shared/button";
+import Button from "../button";
 import classNames from "classnames";
 
 import "./style.scss";
-import { setCategoryId } from "../../store/slices/filter/filterSlice";
-import { selectFilterCategoryId } from "../../store/slices/filter/selectors";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../../../store";
+import { setCategoryId } from "../../../../store/filter/filter.slice";
+import { filterSelectors } from "../../../../store/filter/filter.selectors";
 
 interface ToggleBarProps {
   className?: string;
@@ -15,8 +16,9 @@ interface ToggleBarProps {
 const CATEGORIES = ["All", "Meat", "Vegan", "Grill", "Spicy", "Calzone"];
 
 const ToggleBar: FC<ToggleBarProps> = ({ className }) => {
-  const categoryId = useSelector(selectFilterCategoryId);
-  const dispatch = useDispatch();
+  const categoryId = useSelector(filterSelectors.selectCategoryId);
+  const dispatch = useAppDispatch();
+
   return (
     <div className={classNames("toggle-bar", className)}>
       {CATEGORIES.map((item, i) => (

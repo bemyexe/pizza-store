@@ -2,29 +2,22 @@ import { useEffect, useRef, useState } from "react";
 import Button from "../button";
 import { v4 as uuidv4 } from "uuid";
 import "./style.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { setSort } from "../../../store/slices/filter/filterSlice";
-import { selectSortType } from "../../../store/slices/filter/selectors";
-
-type ListType = {
-  sortType: string;
-};
-
-const LIST: ListType[] = [
-  { sortType: "popular" },
-  { sortType: "price" },
-  { sortType: "letters" },
-];
+import { LIST } from "../../../../constants/sort-list";
+import { useAppDispatch } from "../../../../store";
+import { useSelector } from "react-redux";
+import { filterSelectors } from "../../../../store/filter/filter.selectors";
+import { setSortProperty } from "../../../../store/filter/filter.slice";
+import { SortPrors } from "../../../../@types/sort-types";
 
 const Sort = () => {
   const sortRef = useRef<HTMLDivElement>(null);
-  const sort = useSelector(selectSortType);
-  const dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);
 
-  const handleClickSort = (item: string) => {
-    dispatch(setSort(item));
+  const dispatch = useAppDispatch();
+  const sort = useSelector(filterSelectors.sortName);
+  const handleClickSort = (obj: SortPrors) => {
+    dispatch(setSortProperty(obj));
     setOpen(!open);
   };
 
@@ -43,22 +36,22 @@ const Sort = () => {
   return (
     <div ref={sortRef} className="sort-main">
       <div className="sort-title">
-        <div>Sort by:</div>
+        <div>Sort by: </div>
         <Button onClick={() => setOpen(!open)} title="popular" styleType="add">
           {sort}
         </Button>
       </div>
       {open && (
         <div className="sort-popup">
-          {LIST.map((item) => (
+          {LIST.map((obj) => (
             <Button
               key={uuidv4()}
-              onClick={() => handleClickSort(item.sortType)}
-              title={item.sortType}
+              onClick={() => handleClickSort(obj)}
+              title={obj.name}
               styleType="add"
-              className={sort === item.sortType ? "active" : ""}
+              className={sort === obj.name ? "active" : ""}
             >
-              {item.sortType}
+              {obj.name}
             </Button>
           ))}
         </div>

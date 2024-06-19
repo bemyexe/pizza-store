@@ -1,9 +1,8 @@
-import { ChangeEvent, FC, useContext, useRef } from "react";
+import { ChangeEvent, FC, useRef, useState } from "react";
 import "./style.scss";
-import { SomeContext } from "../../../pages/root-page";
 
 const Input: FC = () => {
-  const { state, setState } = useContext(SomeContext);
+  const [state, setState] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClearInput = () => {

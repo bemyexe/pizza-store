@@ -6,15 +6,15 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 
-import { Provider } from "react-redux";
-
 import RootPage from "./app/pages/root-page";
 
 import "./styles/global-styles.scss";
 import "./styles/colors.scss";
 import MainPage from "./app/pages/main-page";
 import CartPage from "./app/pages/cart-page";
-import store from "./app/store/store";
+
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 const router = createBrowserRouter([
   {

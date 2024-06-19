@@ -1,47 +1,36 @@
-import { FC, useContext, useEffect, useState } from "react";
-import { pizzaservice } from "../../services/pizza.service/pizza.service";
+import { FC, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import "./style.scss";
 import PizzaItem from "../pizza-item";
 import Skeleton from "../shared/skeleton";
-import { SomeContext } from "../../pages/root-page";
-import { useDispatch, useSelector } from "react-redux";
-import { setItems } from "../../store/slices/pizza/pizzaSlice";
-import { selectPizzaData } from "../../store/slices/pizza/selectors";
+
 import { IPizzaItem } from "../../services/pizza.service/response/pizza.response";
+import { pizzaservice } from "../../services/pizza.service/pizza.service";
 
 const PizzaGrid: FC = () => {
-  const { state } = useContext(SomeContext);
-
-  const pizza = useSelector(selectPizzaData);
-  const dispatch = useDispatch();
+  const [pizza, setState] = useState<IPizzaItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchPizza() {
+    const fetchPizza = async () => {
       try {
         setIsLoading(true);
         const res = await pizzaservice.getPizzaItems();
-        dispatch(setItems(res));
+        setState(res);
       } catch {
-        console.log("error");
+        console.log("gg");
       } finally {
         setIsLoading(false);
       }
-    }
+    };
     fetchPizza();
-  }, [dispatch]);
+  }, []);
 
   const skeleton = [...new Array(3)].map(() => <Skeleton key={uuidv4()} />);
-  const pizzas = pizza
-    .filter((item: IPizzaItem) => {
-      if (item.title.toLowerCase().includes(state.toLowerCase())) {
-        return true;
-      }
-      return false;
-    })
-    .map((item: IPizzaItem) => <PizzaItem key={uuidv4()} {...item} />);
+  const pizzas = pizza.map((item: IPizzaItem) => (
+    <PizzaItem key={uuidv4()} {...item} />
+  ));
 
   return <div className="pizza-grid">{isLoading ? skeleton : pizzas}</div>;
 };

@@ -1,11 +1,28 @@
 .header {
-  .h-title {
-    font-size: 35px;
-    font-weight: 900;
-  }
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
   gap: 10px;
   display: flex;
   justify-content: space-between;
   padding: 10px;
   align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.header.scrolled {
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: center;
+}
+.h-title {
+  font-size: 35px;
+  font-weight: 900;
 }

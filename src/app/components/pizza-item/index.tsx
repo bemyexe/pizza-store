@@ -1,19 +1,14 @@
 import { FC, useState } from "react";
 import Button from "../shared/button";
-import { TextLSemibold, TextMSemibold } from "../shared/typography";
+import { TextMSemibold } from "../shared/typography";
 import { v4 as uuidv4 } from "uuid";
 
 import "./style.scss";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addItem,
-  minusItem,
-  removeItem,
-} from "../../store/slices/cart/cartSlice";
-import { selectCartItemById } from "../../store/slices/cart/selectors";
+import { useAppDispatch } from "../../../store";
+import { addItemToCart } from "../../../store/cart/cart.slice";
 
 interface PizzaItemProps {
-  id: number;
+  id: string;
   title: string;
   imageUrl: string;
   types: number[];
@@ -32,11 +27,9 @@ const PizzaItem: FC<PizzaItemProps> = ({
   price,
   sizes,
 }) => {
-  const [type, setType] = useState(0);
-  const [size, setSize] = useState(0);
-  const ItemInCart = useSelector(selectCartItemById(id));
-  const addedQuantity = ItemInCart ? ItemInCart.quantity : 0;
-  const dispatch = useDispatch();
+  const [type, setType] = useState(types[0]);
+  const [size, setSize] = useState(sizes[0]);
+  const dispatch = useAppDispatch();
   const handleAddCart = (e: React.MouseEvent) => {
     e.stopPropagation();
     const item = {
@@ -45,18 +38,10 @@ const PizzaItem: FC<PizzaItemProps> = ({
       price,
       imageUrl,
       type: TYPES[type],
-      size: size,
-      count: 0,
-      quantity: 0,
+      size,
+      quantity: 1,
     };
-    dispatch(addItem(item));
-  };
-  const onclickMinus = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (addedQuantity === 1) {
-      dispatch(removeItem(id));
-    }
-    dispatch(minusItem(id));
+    dispatch(addItemToCart(item));
   };
 
   return (
@@ -82,15 +67,15 @@ const PizzaItem: FC<PizzaItemProps> = ({
           ))}
         </div>
         <div className="pizza-options_content">
-          {sizes.map((item, i) => (
+          {sizes.map((item) => (
             <Button
               key={uuidv4()}
               onClick={() => {
-                setSize(i);
+                setSize(item);
               }}
               title={title}
               styleType="options"
-              className={size === i ? "active" : ""}
+              className={size === item ? "active" : ""}
             >
               {item}
             </Button>
@@ -101,38 +86,17 @@ const PizzaItem: FC<PizzaItemProps> = ({
         <div>
           <TextMSemibold>{`от ${price} Р`}</TextMSemibold>
         </div>
-        <div>
-          <Button
-            onClick={(e) => handleAddCart(e)}
-            title={title}
-            styleType="add"
-          >
-            <Button
-              onClick={(e) => {
-                handleAddCart(e);
-              }}
-              title={title}
-            >
-              +
-            </Button>
-            {ADD}
-            <TextLSemibold>
-              {addedQuantity > 0 ? addedQuantity : ""}
-            </TextLSemibold>
-            {addedQuantity ? (
-              <Button
-                onClick={(e) => {
-                  onclickMinus(e);
-                }}
-                title={title}
-                className="minusBtn"
-              >
-                -
-              </Button>
-            ) : (
-              ""
-            )}
+        <div
+          className="p-buttons"
+          title={title}
+          onClick={(e) => {
+            handleAddCart(e);
+          }}
+        >
+          <Button onClick={() => {}} title={title}>
+            +
           </Button>
+          {ADD}
         </div>
       </div>
     </div>

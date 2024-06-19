@@ -1,19 +1,13 @@
 import { useSelector } from "react-redux";
-import CartItem from "../../components/cartItem";
-
+import Cart from "../../components/shared/cart";
 import "./style.scss";
-import { selectCartItems } from "../../store/slices/cart/selectors";
+import { cartSelectors } from "../../../store/cart/cart.selectors";
 
 const CartPage = () => {
-  const cartItems = useSelector(selectCartItems);
-
+  const isCartEmpty = useSelector(cartSelectors.selectItems).length;
   return (
     <div className="cart-page">
-      {cartItems.length ? (
-        cartItems.map((item) => <CartItem key={item.id} {...item} />)
-      ) : (
-        <div className="clear">CLEAR CART!</div>
-      )}
+      {isCartEmpty ? <Cart /> : <div className="clear">CLEAR CART!</div>}
     </div>
   );
 };

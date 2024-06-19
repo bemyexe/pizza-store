@@ -4,22 +4,18 @@ import "./style.scss";
 import { TextMLight } from "../shared/typography";
 import { useDispatch } from "react-redux";
 import {
-  addItem,
-  minusItem,
-  removeItem,
-} from "../../store/slices/cart/cartSlice";
+  decreaseItemQuantity,
+  generateCartItemKey,
+  increaseItemQuantity,
+  removeItemFromCart,
+} from "../../../store/cart/cart.slice";
+import { CartItemProps } from "../../../@types/cart-types";
 
-interface CartItemProps {
-  id: number;
-  title: string;
-  type: string;
-  size: number;
-  price: number;
-  quantity: number;
-  imageUrl: string;
-}
-
-const SIZES = ["26sm.", "30sm.", "40sm"];
+const SIZES: { [key: number]: string } = {
+  26: "26sm.",
+  30: "30sm.",
+  40: "40sm",
+};
 
 const CartItem: FC<CartItemProps> = ({
   id,
@@ -31,22 +27,25 @@ const CartItem: FC<CartItemProps> = ({
   imageUrl,
 }) => {
   const dispatch = useDispatch();
-  const onclickPlus = () => {
-    dispatch(
-      addItem({
-        id,
-        title: "",
-        price: 0,
-        imageUrl: "",
-        type: "",
-        size: 0,
-        count: 0,
-        quantity: 0,
-      })
-    );
+  const newItem: CartItemProps = {
+    id,
+    title,
+    type,
+    size,
+    price,
+    quantity,
+    imageUrl,
   };
+  const onclickPlus = () => {
+    dispatch(increaseItemQuantity(generateCartItemKey(newItem)));
+  };
+
   const onclickMinus = () => {
-    dispatch(minusItem(id));
+    dispatch(decreaseItemQuantity(generateCartItemKey(newItem)));
+  };
+
+  const onDeleteItem = () => {
+    dispatch(removeItemFromCart(generateCartItemKey(newItem)));
   };
 
   return (
@@ -58,7 +57,7 @@ const CartItem: FC<CartItemProps> = ({
             <div className="cart-item-title">{title}</div>
             <div className="cart-item-options">
               <div>
-                <TextMLight>{type}</TextMLight>,{" "}
+                <TextMLight>{type}</TextMLight>,
                 <TextMLight>{SIZES[size]}</TextMLight>
               </div>
             </div>
@@ -76,7 +75,7 @@ const CartItem: FC<CartItemProps> = ({
         <img
           src="assets/delete.svg"
           className="cart-item-clear"
-          onClick={() => dispatch(removeItem(id))}
+          onClick={() => onDeleteItem()}
         />
       </div>
     </div>
