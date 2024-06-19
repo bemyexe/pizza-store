@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CartItem } from "../../@types/cart-types";
+import { CartItemProps } from "../../@types/cart-types";
 
 const CART_SLICE_NAME = "cart";
 
 export interface ICartState {
   totalPrice: number;
-  items: CartItem[];
+  items: CartItemProps[];
 }
 
 const INITIAL_CART_STATE: ICartState = {
@@ -13,7 +13,7 @@ const INITIAL_CART_STATE: ICartState = {
   items: [],
 };
 
-export function generateCartItemKey(item: CartItem): string {
+export function generateCartItemKey(item: CartItemProps): string {
   return `${item.id}-${item.size}-${item.type}`;
 }
 
@@ -21,7 +21,7 @@ const cartSlice = createSlice({
   name: CART_SLICE_NAME,
   initialState: INITIAL_CART_STATE,
   reducers: {
-    addItemToCart(state, action: PayloadAction<CartItem>) {
+    addItemToCart(state, action: PayloadAction<CartItemProps>) {
       const newItem = action.payload;
       const newItemKey = generateCartItemKey(newItem);
       const existingItem = state.items.find(
