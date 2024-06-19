@@ -7,7 +7,7 @@ interface TextProps {
 }
 
 interface TypographyProps extends TextProps {
-  weight: Weight;
+  fontWeight: Weight;
   size: Size;
 }
 
@@ -27,17 +27,17 @@ enum Size {
 
 const Text = styled.span<TypographyProps>`
   font-size: ${({ size }) => size};
-  font-weight: ${({ weight }) => weight};
+  font-weight: ${({ fontWeight }) => fontWeight};
 `;
 
 export const TypographyComponent: FC<TypographyProps> = ({
-  weight,
+  fontWeight,
   size,
   children,
   className,
 }) => {
   return (
-    <Text weight={weight} size={size} className={className}>
+    <Text fontWeight={fontWeight} size={size} className={className}>
       {children}
     </Text>
   );
@@ -45,7 +45,7 @@ export const TypographyComponent: FC<TypographyProps> = ({
 
 export const TextXLSemibold: FC<TextProps> = ({ children, className }) => (
   <TypographyComponent
-    weight={Weight.semibold}
+    fontWeight={Weight.semibold}
     size={Size.xl}
     className={className}
   >
@@ -55,7 +55,7 @@ export const TextXLSemibold: FC<TextProps> = ({ children, className }) => (
 
 export const TextLSemibold: FC<TextProps> = ({ children, className }) => (
   <TypographyComponent
-    weight={Weight.semibold}
+    fontWeight={Weight.semibold}
     size={Size.l}
     className={className}
   >
@@ -65,7 +65,7 @@ export const TextLSemibold: FC<TextProps> = ({ children, className }) => (
 
 export const TextMSemibold: FC<TextProps> = ({ children, className }) => (
   <TypographyComponent
-    weight={Weight.semibold}
+    fontWeight={Weight.semibold}
     size={Size.m}
     className={className}
   >
@@ -75,7 +75,7 @@ export const TextMSemibold: FC<TextProps> = ({ children, className }) => (
 
 export const TextSSemibold: FC<TextProps> = ({ children, className }) => (
   <TypographyComponent
-    weight={Weight.semibold}
+    fontWeight={Weight.semibold}
     size={Size.s}
     className={className}
   >
@@ -85,7 +85,7 @@ export const TextSSemibold: FC<TextProps> = ({ children, className }) => (
 
 export const TextXSSemibold: FC<TextProps> = ({ children, className }) => (
   <TypographyComponent
-    weight={Weight.semibold}
+    fontWeight={Weight.semibold}
     size={Size.xs}
     className={className}
   >
@@ -95,7 +95,7 @@ export const TextXSSemibold: FC<TextProps> = ({ children, className }) => (
 
 export const TextXLRegular: FC<TextProps> = ({ children, className }) => (
   <TypographyComponent
-    weight={Weight.regular}
+    fontWeight={Weight.regular}
     size={Size.xl}
     className={className}
   >
@@ -105,7 +105,7 @@ export const TextXLRegular: FC<TextProps> = ({ children, className }) => (
 
 export const TextLRegular: FC<TextProps> = ({ children, className }) => (
   <TypographyComponent
-    weight={Weight.regular}
+    fontWeight={Weight.regular}
     size={Size.l}
     className={className}
   >
@@ -115,7 +115,7 @@ export const TextLRegular: FC<TextProps> = ({ children, className }) => (
 
 export const TextMRegular: FC<TextProps> = ({ children, className }) => (
   <TypographyComponent
-    weight={Weight.regular}
+    fontWeight={Weight.regular}
     size={Size.m}
     className={className}
   >
@@ -125,7 +125,7 @@ export const TextMRegular: FC<TextProps> = ({ children, className }) => (
 
 export const TextSRegular: FC<TextProps> = ({ children, className }) => (
   <TypographyComponent
-    weight={Weight.regular}
+    fontWeight={Weight.regular}
     size={Size.s}
     className={className}
   >
@@ -135,7 +135,7 @@ export const TextSRegular: FC<TextProps> = ({ children, className }) => (
 
 export const TextXSRegular: FC<TextProps> = ({ children, className }) => (
   <TypographyComponent
-    weight={Weight.regular}
+    fontWeight={Weight.regular}
     size={Size.xs}
     className={className}
   >
@@ -145,7 +145,7 @@ export const TextXSRegular: FC<TextProps> = ({ children, className }) => (
 
 export const TextXLLight: FC<TextProps> = ({ children, className }) => (
   <TypographyComponent
-    weight={Weight.light}
+    fontWeight={Weight.light}
     size={Size.xl}
     className={className}
   >
@@ -155,7 +155,7 @@ export const TextXLLight: FC<TextProps> = ({ children, className }) => (
 
 export const TextLLight: FC<TextProps> = ({ children, className }) => (
   <TypographyComponent
-    weight={Weight.light}
+    fontWeight={Weight.light}
     size={Size.l}
     className={className}
   >
@@ -165,7 +165,7 @@ export const TextLLight: FC<TextProps> = ({ children, className }) => (
 
 export const TextMLight: FC<TextProps> = ({ children, className }) => (
   <TypographyComponent
-    weight={Weight.light}
+    fontWeight={Weight.light}
     size={Size.m}
     className={className}
   >
@@ -175,7 +175,7 @@ export const TextMLight: FC<TextProps> = ({ children, className }) => (
 
 export const TextSLight: FC<TextProps> = ({ children, className }) => (
   <TypographyComponent
-    weight={Weight.light}
+    fontWeight={Weight.light}
     size={Size.s}
     className={className}
   >
@@ -185,7 +185,7 @@ export const TextSLight: FC<TextProps> = ({ children, className }) => (
 
 export const TextXSLight: FC<TextProps> = ({ children, className }) => (
   <TypographyComponent
-    weight={Weight.light}
+    fontWeight={Weight.light}
     size={Size.xs}
     className={className}
   >
