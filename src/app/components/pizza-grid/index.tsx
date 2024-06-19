@@ -7,9 +7,14 @@ import Skeleton from "../shared/skeleton";
 
 import { IPizzaItem } from "../../services/pizza.service/response/pizza.response";
 import { pizzaservice } from "../../services/pizza.service/pizza.service";
+import { useSelector } from "react-redux";
+import { pizzaSelectors } from "../../../store/pizzas/pizza.selectors";
+import { useAppDispatch } from "../../../store";
+import { setPizza } from "../../../store/pizzas/pizza.slice";
 
 const PizzaGrid: FC = () => {
-  const [pizza, setState] = useState<IPizzaItem[]>([]);
+  const pizza = useSelector(pizzaSelectors.selectPizza);
+  const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -17,7 +22,7 @@ const PizzaGrid: FC = () => {
       try {
         setIsLoading(true);
         const res = await pizzaservice.getPizzaItems();
-        setState(res);
+        dispatch(setPizza(res));
       } catch {
         console.log("gg");
       } finally {
@@ -25,7 +30,7 @@ const PizzaGrid: FC = () => {
       }
     };
     fetchPizza();
-  }, []);
+  }, [dispatch]);
 
   const skeleton = [...new Array(3)].map(() => <Skeleton key={uuidv4()} />);
   const pizzas = pizza.map((item: IPizzaItem) => (
