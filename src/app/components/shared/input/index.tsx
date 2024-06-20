@@ -10,16 +10,6 @@ const Input: FC = () => {
   const state = useSelector(filterSelectors.searchValue);
   const dispatch = useAppDispatch();
 
-  // const debounce = (callback, delay: number) => {
-  //   let timeoutId;
-  //   return (...args) => {
-  //     clearTimeout(timeoutId);
-  //     timeoutId = setTimeout(() => {
-  //       (timeoutId = null), callback(...args);
-  //     }, delay);
-  //   };
-  // };
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     dispatch(setSearchValue(value));
