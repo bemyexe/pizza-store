@@ -9,4 +9,4 @@ export interface IPizzaItem {
   rating: number;
 }
 
-export type PizzaItems = IPizzaItem[];
+export type PizzaItems = IPizzaItem[] | string;

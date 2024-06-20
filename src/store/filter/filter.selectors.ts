@@ -2,7 +2,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "..";
 import { IFilterState } from "./filter.slice";
 
-const selectFilterState: (state: RootState) => IFilterState = (state) =>
+export const selectFilterState: (state: RootState) => IFilterState = (state) =>
   state.filterState;
 
 const selectCategoryId = createSelector(
@@ -17,10 +17,15 @@ const sortProperty = createSelector(
 );
 
 const pageCount = createSelector(selectFilterState, (state) => state.pageCount);
+const searchValue = createSelector(
+  selectFilterState,
+  (state) => state.searchValue
+);
 
 export const filterSelectors = {
   selectCategoryId,
   sortName,
   sortProperty,
   pageCount,
+  searchValue,
 };

@@ -1,12 +1,32 @@
-import { ChangeEvent, FC, useRef, useState } from "react";
+import { ChangeEvent, FC, useRef } from "react";
 import "./style.scss";
+import { useSelector } from "react-redux";
+import { filterSelectors } from "../../../../store/filter/filter.selectors";
+import { useAppDispatch } from "../../../../store";
+import { setSearchValue } from "../../../../store/filter/filter.slice";
 
 const Input: FC = () => {
-  const [state, setState] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const state = useSelector(filterSelectors.searchValue);
+  const dispatch = useAppDispatch();
+
+  // const debounce = (callback, delay: number) => {
+  //   let timeoutId;
+  //   return (...args) => {
+  //     clearTimeout(timeoutId);
+  //     timeoutId = setTimeout(() => {
+  //       (timeoutId = null), callback(...args);
+  //     }, delay);
+  //   };
+  // };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    dispatch(setSearchValue(value));
+  };
 
   const handleClearInput = () => {
-    setState("");
+    dispatch(setSearchValue(""));
     inputRef.current?.focus();
   };
 
@@ -15,9 +35,7 @@ const Input: FC = () => {
       <input
         ref={inputRef}
         value={state}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setState(e.target.value)
-        }
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
         placeholder="what pizza?"
         className="input"
       />
