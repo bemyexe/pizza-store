@@ -1,22 +1,31 @@
-import { ChangeEvent, FC, useRef } from "react";
-import "./style.scss";
-import { useSelector } from "react-redux";
-import { filterSelectors } from "../../../../store/filter/filter.selectors";
-import { useAppDispatch } from "../../../../store";
-import { setSearchValue } from "../../../../store/filter/filter.slice";
+import { ChangeEvent, FC, useCallback, useRef, useState } from 'react';
+import './style.scss';
+import { useAppDispatch } from '../../../../store';
+import { setSearchValue } from '../../../../store/filter/filter.slice';
+import { debounce } from '../../../../helpers/debounce';
 
 const Input: FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const state = useSelector(filterSelectors.searchValue);
+
+  const [value, setValue] = useState<string>('');
+
   const dispatch = useAppDispatch();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const updateSearchValue = useCallback(
+    debounce((str: string) => {
+      dispatch(setSearchValue(str));
+    }, 1000),
+    []
+  );
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    dispatch(setSearchValue(value));
+    setValue(e.target.value);
+    updateSearchValue(e.target.value);
   };
 
   const handleClearInput = () => {
-    dispatch(setSearchValue(""));
+    setValue('');
     inputRef.current?.focus();
   };
 
@@ -24,12 +33,12 @@ const Input: FC = () => {
     <div className="search">
       <input
         ref={inputRef}
-        value={state}
+        value={value}
         onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
         placeholder="what pizza?"
         className="input"
       />
-      {state && (
+      {value && (
         <img
           onClick={() => handleClearInput()}
           className="close"
