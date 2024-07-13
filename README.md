@@ -1,7 +1,12 @@
-# Pizza Store (REACT, REDUX-TOOLKIT)
+# Readme
 
-[visit](https://pizza-store-react-redux.netlify.app/)
+### Project
 
-### LAUNCH
+[https://pizza-store-react-redux.netlify.app/](https://pizza-store-react-redux.netlify.app/)
 
-npm run dev
+### Stack
+- React + Typescript
+- Redux + Redux Toolkit
+- CSS, SCSS
+- ESLint + Prettier
+- Vite
