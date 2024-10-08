@@ -10,3 +10,5 @@
 - CSS, SCSS
 - ESLint + Prettier
 - Vite
+
+UPD: 08.10.2024 DATABASE was deleted.
